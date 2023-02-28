@@ -1,8 +1,11 @@
 package transport;
 
 public class Truck extends Transport<DriverC> {
-    public Truck(String brand, String model, double engineVolume, DriverC driver) {
+    private LoadType loadType;
+
+    public Truck(String brand, String model, double engineVolume, DriverC driver, LoadType loadType) {
         super(brand, model, engineVolume, driver);
+        this.loadType = loadType;
     }
 
     @Override
@@ -13,11 +16,6 @@ public class Truck extends Transport<DriverC> {
     @Override
     public void stopMove() {
         System.out.println("Грузовик " + getBrand() + " завершил движение");
-    }
-
-    @Override
-    public void printType() {
-
     }
 
     @Override
@@ -42,19 +40,20 @@ public class Truck extends Transport<DriverC> {
 
     }
 
-    enum loadType{ N1(null, 3.5F), N2(3.5F, 12F), N3(12F, null);
+    public enum LoadType {
+        N1(0F, 3.5F), N2(3.5F, 12F), N3(12F, 52F);
         private Float minLimit;
         private Float maxLimit;
 
-        loadType(Float minLimit, Float maxLimit) {
+        LoadType(Float minLimit, Float maxLimit) {
             this.minLimit = minLimit;
             this.maxLimit = maxLimit;
         }
 
         public float getMinLimit() {
-            if (minLimit <= 3.5 || minLimit == null){
-                System.out.println("Грузоподъемность: до " +getMaxLimit()+ " тонн");
-            }
+           if (minLimit <= 3.5 || minLimit == null) {
+               System.out.println("Грузоподъемность: до " + getMaxLimit() + " тонн");
+           }
             return minLimit;
         }
 
@@ -63,8 +62,8 @@ public class Truck extends Transport<DriverC> {
         }
 
         public float getMaxLimit() {
-            if (maxLimit >= 12 || maxLimit == null){
-                System.out.println("Грузоподъемность: от " +getMinLimit()+ " тонн");
+            if (maxLimit >= 12 || maxLimit == null) {
+                System.out.println("Грузоподъемность: от " + getMinLimit() + " тонн");
             }
             return maxLimit;
         }
@@ -75,8 +74,13 @@ public class Truck extends Transport<DriverC> {
 
         @Override
         public String toString() {
-            return "Грузоподъемность: от " + getMinLimit() +
+            return "от " + getMinLimit() +
                     " тонн до " + getMaxLimit() + " тонн";
         }
+
+    }
+    @Override
+    public void printType() {
+        System.out.println("Грузоподъемность: "+ loadType);
     }
 }

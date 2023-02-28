@@ -1,8 +1,19 @@
 package transport;
 
 public class Bus extends Transport<DriverD> {
-    public Bus(String brand, String model, double engineVolume, DriverD driver) {
+    private CapacityType capacityType;
+
+    public Bus(String brand, String model, double engineVolume, DriverD driver, CapacityType capacityType) {
         super(brand, model, engineVolume, driver);
+        this.capacityType = capacityType;
+    }
+
+    public CapacityType getCapacityType() {
+        return capacityType;
+    }
+
+    public void setCapacityType(CapacityType capacityType) {
+        this.capacityType = capacityType;
     }
 
     @Override
@@ -17,7 +28,7 @@ public class Bus extends Transport<DriverD> {
 
     @Override
     public void printType() {
-
+        System.out.println(capacityType);
     }
 
     @Override
@@ -42,17 +53,17 @@ public class Bus extends Transport<DriverD> {
 
     }
 
-    enum capacityType {
-        Особо_малая(0, 10),
-        Малая(10, 25),
-        Средняя(40, 50),
-        Большая(60, 80),
-        Особо_большая(100, 120);
+    public enum CapacityType {
+        VERY_SMALL(0, 10),
+        SMALL(10, 25),
+        MEDIUM(40, 50),
+        LARGE(60, 80),
+        VERY_LARGE(100, 120);
 
         private int minLimit;
         private int maxLimit;
 
-        capacityType(int minLimit, int maxLimit) {
+        CapacityType(int minLimit, int maxLimit) {
             this.minLimit = minLimit;
             this.maxLimit = maxLimit;
         }

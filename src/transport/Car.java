@@ -1,16 +1,18 @@
 package transport;
 
 public class Car extends Transport<DriverB> {
-private Car.bodyType bodyType;
+    private BodyType bodyType;
 
-public Car(String brand, String model, double engineVolume, DriverB driver, Car.bodyType bodyType) {
+    public Car(String brand, String model, double engineVolume, DriverB driver, BodyType bodyType) {
         super(brand, model, engineVolume, driver);
-}
-    public Car.bodyType getBodyType() {
+        this.bodyType = bodyType;
+    }
+
+    public BodyType getBodyType() {
         return bodyType;
     }
 
-    public void setBodyType(Car.bodyType bodyType) {
+    public void setBodyType(BodyType bodyType) {
         this.bodyType = bodyType;
     }
 
@@ -44,31 +46,32 @@ public Car(String brand, String model, double engineVolume, DriverB driver, Car.
         int maxSpeed = (int) (minLimit - (maxLimit - minLimit) * Math.random());
         System.out.println("Максимальная скорость автомобиля " + maxSpeed);
     }
-    public enum bodyType{ SEDAN("Седан"), HATCHBACK("Хэтчбэк"), CUPE("Купе"), UNIVERSAL("Универсал"),
+
+    public enum BodyType {
+        SEDAN("Седан"), HATCHBACK("Хэтчбэк"), CUPE("Купе"), UNIVERSAL("Универсал"),
         OFFROAD("Внедорожник"), CROSS("Кроссовер"), PICKUP("Пикап"), FURGON("Фургон"), MINIVAN("Минивен");
 
         private String bodyType;
 
-       bodyType(String bodyType) {
-           this.bodyType = bodyType;
-       }
+        BodyType(String bodyType) {
+            this.bodyType = bodyType;
+        }
 
-      // public String getBodyType() {
-      //     return bodyType;
-      // }
+         public String getBodyType() {
+             return bodyType;
+         }
 
-      //public void setBodyType(String bodyType) {
-      //    this.bodyType = bodyType;
-      //}
-      //@Override
-      //public String toString() {return "Тип кузова: " + getBodyType();}
+        public void setBodyType(String bodyType) {
+            this.bodyType = bodyType;
+        }
+        @Override
+        public String toString() {return "Тип кузова: " + getBodyType();}
 
     }
+
     public void printType() {
-        System.out.println("Тип кузова: " + bodyType);
+        System.out.println(bodyType);
     }
-
-
 
 
 }
